@@ -1,3 +1,7 @@
+// React rendering has been disabled to support the standalone HTML version in index.html.
+// To revert to React mode, uncomment the lines below and restore index.html to a clean state.
+
+/*
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
@@ -13,3 +17,4 @@ root.render(
     <App />
   </React.StrictMode>
 );
+*/

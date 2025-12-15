@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wuhu Shipyard Innovation Report</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Oswald:wght@400;500;700&display=swap');
-      
       body {
         font-family: 'Inter', sans-serif;
         background-color: #f8fafc; /* Slate 50 */
@@ -24,27 +27,12 @@
         font-family: 'Oswald', sans-serif;
       }
 
-      /* Custom scrollbar - Light Mode */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #f1f5f9;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-      }
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #f1f5f9; }
+      ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
       
-      .gradient-text {
-        background: linear-gradient(to right, #2563eb, #059669); /* Blue-600 to Emerald-600 */
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
       .poster-border {
         position: relative;
       }
@@ -53,32 +41,359 @@
         position: absolute;
         width: 20px;
         height: 20px;
-        border: 2px solid rgba(37, 99, 235, 0.4); /* Blue 600, lower opacity */
+        border: 2px solid rgba(37, 99, 235, 0.4);
         transition: all 0.3s ease;
       }
       .poster-border::before { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
       .poster-border::after { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
       
-      .poster-card:hover .poster-border::before,
-      .poster-card:hover .poster-border::after {
+      .group\/card:hover .poster-border::before,
+      .group\/card:hover .poster-border::after {
         width: 100%;
         height: 100%;
         border-color: rgba(37, 99, 235, 0.8);
       }
     </style>
-  <script type="importmap">
+<script type="importmap">
 {
   "imports": {
+    "recharts": "https://esm.sh/recharts@^3.6.0",
     "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "recharts": "https://esm.sh/recharts@^3.5.1"
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
   }
 }
 </script>
 </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<body class="min-h-screen py-4 md:py-8 px-2 md:px-4 flex justify-center items-start overflow-x-hidden">
+
+    <!-- Main Container -->
+    <div class="max-w-[1600px] w-full bg-white/90 backdrop-blur-xl border border-slate-200 shadow-2xl relative rounded-sm overflow-hidden flex flex-col">
+        
+        <!-- Decorative Top Line -->
+        <div class="h-1 w-full bg-gradient-to-r from-blue-600 via-teal-500 to-indigo-600"></div>
+
+        <main class="flex-grow flex flex-col">
+            
+            <!-- HERO SECTION -->
+            <header class="relative bg-white border-b border-slate-200 overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://picsum.photos/seed/shipyard2/1920/600" alt="Shipyard Background" class="w-full h-full object-cover opacity-10 grayscale" />
+                    <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/40 z-10"></div>
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 z-10 mix-blend-multiply"></div>
+                </div>
+
+                <div class="relative z-20 px-6 py-8 md:py-14 md:px-12 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+                    <!-- Title Block -->
+                    <div class="max-w-4xl flex-1 w-full">
+                        <div class="flex items-center space-x-3 mb-2 md:mb-4">
+                             <div class="p-1 md:p-1.5 bg-blue-600 rounded shadow-md shrink-0">
+                                <i data-lucide="ship" class="w-4 h-4 md:w-5 md:h-5 text-white"></i>
+                             </div>
+                             <span class="text-blue-700 font-bold tracking-widest uppercase text-xs md:text-sm whitespace-nowrap">
+                                芜湖造船厂出品，人船情未了排版
+                             </span>
+                             <div class="hidden md:block h-px w-24 bg-blue-300"></div>
+                        </div>
+                        
+                        <h1 class="text-3xl sm:text-5xl md:text-7xl font-bold text-slate-900 leading-none tracking-tight uppercase drop-shadow-sm whitespace-nowrap mt-1 md:mt-0">
+                            百年船厂创新跃迁
+                        </h1>
+                        
+                        <div class="text-lg md:text-3xl text-slate-500 mt-3 font-light poster-font leading-snug flex flex-col gap-1">
+                             <span class="block">何以从长江驶向深蓝</span>
+                             <span class="block">于海事展上定义未来</span>
+                        </div>
+                    </div>
+
+                    <!-- Intro Block -->
+                    <div class="md:max-w-md text-slate-600 text-xs md:text-base leading-relaxed border-l-4 border-blue-600 pl-4 bg-slate-50 p-3 md:p-4 rounded-r-lg shadow-sm border border-slate-100 w-full md:w-auto mt-2 md:mt-0">
+                        在2025年中国国际海事展的聚光灯下，拥有逾百年历史的芜湖造船厂，以“河豚蔚蓝”系列及船电一体化PACK换电技术，展示了一场从“硬核技术”到“生态融合”再到“价值定义”的系统性革命。
+                    </div>
+                </div>
+            </header>
+            
+            <!-- MAIN GRID CONTENT -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-0 border-t border-slate-200 divide-y lg:divide-y-0 lg:divide-x divide-slate-200 bg-slate-50/50">
+                
+                <!-- Pillar 1: Blue -->
+                <article class="relative flex flex-col p-6 md:p-8 lg:p-10 group transition-colors hover:bg-slate-50">
+                    <div class="mb-8 relative z-10">
+                        <div class="flex items-center justify-between mb-2 opacity-60">
+                            <span class="text-6xl font-black text-slate-200 absolute -top-4 -left-2 select-none -z-10">01</span>
+                            <span class="text-xs font-bold tracking-widest uppercase border px-2 py-0.5 rounded bg-white text-blue-700 border-blue-200">根脉筑基</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-slate-900 mt-4 mb-2">硬核何以炼成</h2>
+                        <div class="h-1 w-12 bg-blue-500 mb-3"></div>
+                        <p class="text-slate-500 text-sm leading-snug min-h-[2.5rem]">在基础工艺与前沿科研埋下伏笔</p>
+                    </div>
+
+                    <div class="space-y-4 flex-grow relative z-10">
+                        <!-- Item 1.1 -->
+                        <div class="poster-card relative p-5 bg-white border border-blue-100 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 group/card">
+                            <div class="poster-border"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 p-2 rounded bg-slate-50 border border-slate-100 shrink-0">
+                                    <i data-lucide="hammer" class="w-5 h-5 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1 text-slate-800 group-hover/card:text-blue-700 transition-colors">工匠精神淬炼新生</h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed">举办“泛长三角芜船杯”技能竞赛，吸引百位焊接人才。评选42位“金牌焊将”，打造高技能人才孵化器。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 1.2 -->
+                        <div class="poster-card relative p-5 bg-white border border-blue-100 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 group/card">
+                            <div class="poster-border"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 p-2 rounded bg-slate-50 border border-slate-100 shrink-0">
+                                    <i data-lucide="flask-conical" class="w-5 h-5 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1 text-slate-800 group-hover/card:text-blue-700 transition-colors">科研攻坚冰级焊接</h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed">与哈尔滨工程大学共建“冰级焊接实验室”，突破极地装备焊接工艺难题，培育特种焊接人才。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 1.3 -->
+                        <div class="poster-card relative p-5 bg-white border border-blue-100 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 group/card">
+                            <div class="poster-border"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 p-2 rounded bg-slate-50 border border-slate-100 shrink-0">
+                                    <i data-lucide="cpu" class="w-5 h-5 text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1 text-slate-800 group-hover/card:text-blue-700 transition-colors">产研闭环缩短周期</h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed">启用“深远海装备试验研究中心”，构建“基础研究-技术开发-试验验证”完整链条，实现家门口精准验证。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-4 right-4 opacity-[0.03] pointer-events-none text-slate-900">
+                        <i data-lucide="hammer" width="200" height="200" stroke-width="0.5"></i>
+                    </div>
+                </article>
+
+                <!-- Pillar 2: Teal -->
+                <article class="relative flex flex-col p-6 md:p-8 lg:p-10 group transition-colors hover:bg-slate-50">
+                    <div class="mb-8 relative z-10">
+                        <div class="flex items-center justify-between mb-2 opacity-60">
+                            <span class="text-6xl font-black text-slate-200 absolute -top-4 -left-2 select-none -z-10">02</span>
+                            <span class="text-xs font-bold tracking-widest uppercase border px-2 py-0.5 rounded bg-white text-teal-700 border-teal-200">生态融合</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-slate-900 mt-4 mb-2">链条何以重塑</h2>
+                        <div class="h-1 w-12 bg-teal-500 mb-3"></div>
+                        <p class="text-slate-500 text-sm leading-snug min-h-[2.5rem]">超越边界，构筑产业共同体</p>
+                    </div>
+
+                    <div class="space-y-4 flex-grow relative z-10">
+                        <!-- Item 2.1 -->
+                        <div class="poster-card relative p-5 bg-white border border-teal-100 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 group/card">
+                            <div class="poster-border"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 p-2 rounded bg-slate-50 border border-slate-100 shrink-0">
+                                    <i data-lucide="anchor" class="w-5 h-5 text-teal-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1 text-slate-800 group-hover/card:text-blue-700 transition-colors">向上游穿透</h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed">建立永磁电机生产基地，实现核心动力系统本土化率大幅提升，从源头提升整船核心竞争力。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 2.2 -->
+                        <div class="poster-card relative p-5 bg-white border border-teal-100 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 group/card">
+                            <div class="poster-border"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 p-2 rounded bg-slate-50 border border-slate-100 shrink-0">
+                                    <i data-lucide="wallet" class="w-5 h-5 text-teal-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1 text-slate-800 group-hover/card:text-blue-700 transition-colors">向服务延伸</h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed">成立星融融资租赁公司，提供“制造+金融”一体化解决方案，解决重资产痛点，滋养实体制造。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 2.3 -->
+                        <div class="poster-card relative p-5 bg-white border border-teal-100 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 group/card">
+                            <div class="poster-border"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 p-2 rounded bg-slate-50 border border-slate-100 shrink-0">
+                                    <i data-lucide="map" class="w-5 h-5 text-teal-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1 text-slate-800 group-hover/card:text-blue-700 transition-colors">向区域拓展</h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed">牵头成立安徽省船舶工业协会，共建海工绿色科技产业园，实现芜湖研发优势与威海港口优势的强强联合。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-4 right-4 opacity-[0.03] pointer-events-none text-slate-900">
+                        <i data-lucide="anchor" width="200" height="200" stroke-width="0.5"></i>
+                    </div>
+                </article>
+
+                <!-- Pillar 3: Indigo -->
+                <article class="relative flex flex-col p-6 md:p-8 lg:p-10 group transition-colors hover:bg-slate-50">
+                    <div class="mb-8 relative z-10">
+                        <div class="flex items-center justify-between mb-2 opacity-60">
+                            <span class="text-6xl font-black text-slate-200 absolute -top-4 -left-2 select-none -z-10">03</span>
+                            <span class="text-xs font-bold tracking-widest uppercase border px-2 py-0.5 rounded bg-white text-indigo-700 border-indigo-200">方案定义</span>
+                        </div>
+                        <h2 class="text-3xl font-bold text-slate-900 mt-4 mb-2">价值何以超越</h2>
+                        <div class="h-1 w-12 bg-indigo-500 mb-3"></div>
+                        <p class="text-slate-500 text-sm leading-snug min-h-[2.5rem]">从交付产品到交付未来图景</p>
+                    </div>
+
+                    <div class="space-y-4 flex-grow relative z-10">
+                        <!-- Item 3.1 -->
+                        <div class="poster-card relative p-5 bg-white border border-indigo-100 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 group/card">
+                            <div class="poster-border"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 p-2 rounded bg-slate-50 border border-slate-100 shrink-0">
+                                    <i data-lucide="zap" class="w-5 h-5 text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1 text-slate-800 group-hover/card:text-blue-700 transition-colors">水上高铁</h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed">“河豚蔚蓝”系列内河运输船，依托船电共享换电体系，实现30分钟快速换电，被喻为“水运高铁”。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 3.2 -->
+                        <div class="poster-card relative p-5 bg-white border border-indigo-100 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 group/card">
+                            <div class="poster-border"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 p-2 rounded bg-slate-50 border border-slate-100 shrink-0">
+                                    <i data-lucide="network" class="w-5 h-5 text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1 text-slate-800 group-hover/card:text-blue-700 transition-colors">交能融合</h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed">提出船岸电储智能互动系统，船舶靠港可反向为电网供电，实现航运与能源网络的双向赋能。</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 3.3 -->
+                        <div class="poster-card relative p-5 bg-white border border-indigo-100 shadow-sm hover:shadow-md hover:border-blue-300 transition-all duration-300 group/card">
+                            <div class="poster-border"></div>
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 p-2 rounded bg-slate-50 border border-slate-100 shrink-0">
+                                    <i data-lucide="globe" class="w-5 h-5 text-indigo-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1 text-slate-800 group-hover/card:text-blue-700 transition-colors">水陆空天一体化</h3>
+                                    <p class="text-slate-500 text-xs leading-relaxed">集成无人艇、无人机、智能感知与卫星通信，勾勒出立体化、智能化的水上安全新图景。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-4 right-4 opacity-[0.03] pointer-events-none text-slate-900">
+                        <i data-lucide="zap" width="200" height="200" stroke-width="0.5"></i>
+                    </div>
+                </article>
+            </div>
+
+            <!-- FOOTER STATS SECTION -->
+            <section class="bg-slate-100 border-t border-slate-200 p-6 md:p-10 relative overflow-hidden">
+                <div class="flex flex-col xl:flex-row gap-8 items-center justify-between relative z-10">
+                    
+                    <!-- Title Area -->
+                    <div class="xl:w-1/4 text-center xl:text-left">
+                        <h3 class="text-2xl font-bold text-slate-900 uppercase tracking-wider mb-2">
+                            核心数据看板
+                        </h3>
+                        <p class="text-slate-500 text-sm">
+                            Innovation Impact Metrics
+                        </p>
+                        <div class="mt-4 flex gap-2 justify-center xl:justify-start">
+                            <div class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
+                            <div class="w-2 h-2 bg-teal-500 rounded-full animate-pulse delay-75"></div>
+                            <div class="w-2 h-2 bg-indigo-600 rounded-full animate-pulse delay-150"></div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Row -->
+                    <div class="flex-1 w-full grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-white border border-slate-200 p-4 rounded shadow-sm relative overflow-hidden group hover:border-blue-300 hover:shadow-md transition-all">
+                            <div class="absolute top-0 right-0 p-2 opacity-5 font-black text-6xl leading-none select-none text-slate-900 group-hover:text-blue-600 transition-colors">
+                                1
+                            </div>
+                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">金牌焊将</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-3xl md:text-4xl font-bold text-slate-800 font-mono">42</span>
+                                <span class="text-blue-600 text-sm">位</span>
+                            </div>
+                            <p class="text-slate-400 text-[10px] mt-2 leading-tight max-w-[90%]">
+                                选拔出的行业顶尖高技能人才
+                            </p>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-4 rounded shadow-sm relative overflow-hidden group hover:border-blue-300 hover:shadow-md transition-all">
+                            <div class="absolute top-0 right-0 p-2 opacity-5 font-black text-6xl leading-none select-none text-slate-900 group-hover:text-blue-600 transition-colors">
+                                2
+                            </div>
+                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">换电时间</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-3xl md:text-4xl font-bold text-slate-800 font-mono">30</span>
+                                <span class="text-blue-600 text-sm">分钟</span>
+                            </div>
+                            <p class="text-slate-400 text-[10px] mt-2 leading-tight max-w-[90%]">
+                                “河豚蔚蓝”系列实现快速补能
+                            </p>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-4 rounded shadow-sm relative overflow-hidden group hover:border-blue-300 hover:shadow-md transition-all">
+                            <div class="absolute top-0 right-0 p-2 opacity-5 font-black text-6xl leading-none select-none text-slate-900 group-hover:text-blue-600 transition-colors">
+                                3
+                            </div>
+                            <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-1">高端船型</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-3xl md:text-4xl font-bold text-slate-800 font-mono">5</span>
+                                <span class="text-blue-600 text-sm">款</span>
+                            </div>
+                            <p class="text-slate-400 text-[10px] mt-2 leading-tight max-w-[90%]">
+                                海事展上发布的创新船型
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Simple CSS Chart (Replacing Recharts) -->
+                    <div class="xl:w-1/4 h-24 w-full hidden sm:flex items-end gap-2 p-2 opacity-90">
+                        <div class="flex-1 bg-blue-600 rounded-t-sm hover:opacity-80 transition-opacity relative group" style="height: 100%;">
+                             <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">42</div>
+                        </div>
+                        <div class="flex-1 bg-teal-600 rounded-t-sm hover:opacity-80 transition-opacity relative group" style="height: 71%;">
+                             <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">30</div>
+                        </div>
+                        <div class="flex-1 bg-indigo-600 rounded-t-sm hover:opacity-80 transition-opacity relative group" style="height: 12%;">
+                             <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-[10px] px-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">5</div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Background Pattern -->
+                <div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(15,23,42,0.03)_50%,transparent_75%,transparent_100%)] bg-[length:10px_10px] opacity-100 pointer-events-none"></div>
+            </section>
+
+        </main>
+
+        <footer class="bg-slate-100 border-t border-slate-200 py-3 px-6 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-slate-500">
+            <div>
+               Wuhu Shipyard Innovation Report 2025
+            </div>
+            <div class="flex gap-4 mt-2 md:mt-0">
+               <span>Visualization</span>
+               <span>•</span>
+               <span>Digital Poster Series</span>
+            </div>
+        </footer>
+        
+        <!-- Decorative Corner Accents -->
+        <div class="pointer-events-none absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-blue-600 rounded-tl-sm opacity-60"></div>
+        <div class="pointer-events-none absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-blue-600 rounded-tr-sm opacity-60"></div>
+        <div class="pointer-events-none absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-blue-600 rounded-bl-sm opacity-60"></div>
+        <div class="pointer-events-none absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-blue-600 rounded-br-sm opacity-60"></div>
+    </div>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
 </html>
